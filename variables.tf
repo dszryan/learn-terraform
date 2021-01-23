@@ -3,14 +3,22 @@ variable "credentials" {
   description = "Location of the credentials keyfile."
 }
 
-variable "project_id" {
+variable "service_account" {
   type        = string
-  description = "The project ID to host the cluster in."
+  description = "The service account to run nodes as if not overridden in `node_pools`. The create_service_account variable default value (true) will cause a cluster-specific service account to be created."
+}
+
+variable "project_id" {
+  description = "The project ID to host the cluster in"
+}
+
+variable "cluster_name" {
+  description = "The name for the GKE cluster"
+  default     = "gke-on-vpc-cluster"
 }
 
 variable "region" {
-  type        = string
-  description = "The region to host the cluster in."
+  description = "The region to host the cluster in"
 }
 
 variable "zones" {
@@ -18,9 +26,24 @@ variable "zones" {
   description = "The zones to host the cluster in."
 }
 
-variable "name" {
-  type        = string
-  description = "The name of the cluster."
+variable "network" {
+  description = "The VPC network created to host the cluster in"
+  default     = "gke-network"
+}
+
+variable "subnetwork" {
+  description = "The subnetwork created to host the cluster in"
+  default     = "gke-subnet"
+}
+
+variable "ip_range_pods_name" {
+  description = "The secondary ip range to use for pods"
+  default     = "ip-range-pods"
+}
+
+variable "ip_range_services_name" {
+  description = "The secondary ip range to use for services"
+  default     = "ip-range-scv"
 }
 
 variable "machine_type" {
@@ -41,11 +64,6 @@ variable "max_count" {
 variable "disk_size_gb" {
   type        = number
   description = "Size of the node's disk."
-}
-
-variable "service_account" {
-  type        = string
-  description = "The service account to run nodes as if not overridden in `node_pools`. The create_service_account variable default value (true) will cause a cluster-specific service account to be created."
 }
 
 variable "initial_node_count" {
