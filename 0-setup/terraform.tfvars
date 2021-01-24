@@ -1,0 +1,10 @@
+project_id              = "REPLACE_project_id"
+deploy_service_account  = "REPLACE_deploy_service_account"
+node_service_account    = "REPLACE_node_service_account"
+region                  = "australia-southeast1"
+cluster_name            = "gke-cluster"
+machine_type            = "e2-micro"
+initial_node_count      = 1
+min_count               = 1
+max_count               = 3
+disk_size_gb            = 10
