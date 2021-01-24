@@ -2,5 +2,6 @@
 **/.istio/*
 
 .terraform*
+terraform.tfvars
 terraform.tfstate*
 *.json
