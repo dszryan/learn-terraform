@@ -6,12 +6,12 @@ Ensure the software listed in requirements are installed.
 
 ## Setup
 
-execute '0-setup/run.sh'
+execute '0-setup/init.sh' only once to setup google cloud and tfvars
+execute '0-setup/run.sh' to apply terraform
 
 ## Deploy
 
-execute '1-deploy/run.sh'
-
+execute '1-deploy/run.sh' to deploy the containers
 
 ### Pending
 
