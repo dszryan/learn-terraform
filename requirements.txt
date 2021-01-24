@@ -1,0 +1,4 @@
+terraform           # https://archlinux.org/packages/community/x86_64/terraform/
+google-cloud-sdk    # https://aur.archlinux.org/packages/google-cloud-sdk/
+kubectl             # https://archlinux.org/packages/community/x86_64/kubectl/
+istioctl            # https://aur.archlinux.org/packages/istio-bin/

@@ -1,9 +1,9 @@
-variable "credentials" {
+variable "deploy_service_account" {
   type        = string
-  description = "Location of the credentials keyfile."
+  description = "The service account to deploy."
 }
 
-variable "service_account" {
+variable "node_service_account" {
   type        = string
   description = "The service account to run nodes as if not overridden in `node_pools`. The create_service_account variable default value (true) will cause a cluster-specific service account to be created."
 }
@@ -19,11 +19,6 @@ variable "cluster_name" {
 
 variable "region" {
   description = "The region to host the cluster in"
-}
-
-variable "zones" {
-  type        = list(string)
-  description = "The zones to host the cluster in."
 }
 
 variable "network" {
