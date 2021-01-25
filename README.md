@@ -1,5 +1,11 @@
 # PoC - Terraform and Google Container Engine
 
+## DISCLAIMER
+
+ - Heavily modified release by gruntwork-io
+   https://github.com/gruntwork-io/terraform-google-network
+   https://github.com/gruntwork-io/terraform-google-gke
+
 ## Requirements
 
 Ensure the software listed in requirements are installed.
@@ -14,6 +20,7 @@ Ensure the software listed in requirements are installed.
 - execute '1-deploy/run.sh' to deploy the containers
 
 ### Pending
+CONTAINER REGISTRY
 
 KUBECTL
 ISTIO
