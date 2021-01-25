@@ -33,11 +33,9 @@ provider "google" {
 }
 
 provider "kubernetes" {
-  load_config_file        = false
-
-  host                    = "https://${data.google_container_cluster.deployed_cluster.endpoint}"
-  token                   = data.google_client_config.default.access_token
-  cluster_ca_certificate  = base64decode(data.google_container_cluster.deployed_cluster.master_auth[0].cluster_ca_certificate,)
+  host                   = "https://${module.gke.endpoint}"
+  token                  = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(module.gke.ca_certificate,)
 }
 
 ##################################################################################
@@ -240,13 +238,13 @@ resource "kubernetes_secret" "kiali" {
   depends_on = [kubernetes_namespace.istio_system]
 }
 
-## K8S - ISTIO
-resource "null_resource" "istio" {
-  triggers = {
-    always_run = "${timestamp()}"
-  }
-  provisioner "local-exec" {
-    command = "istioctl install -y -f .istio/istio.yaml"
-  }
-  depends_on = [kubernetes_secret.grafana, kubernetes_secret.kiali]
-}
+# ## K8S - ISTIO
+# resource "null_resource" "istio" {
+#   triggers = {
+#     always_run = "${timestamp()}"
+#   }
+#   provisioner "local-exec" {
+#     command = "istioctl install -y -f .istio/istio.yaml"
+#   }
+#   depends_on = [kubernetes_secret.grafana, kubernetes_secret.kiali]
+# }
