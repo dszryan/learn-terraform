@@ -2,9 +2,9 @@
 
 ## DISCLAIMER
 
- - Heavily modified release by gruntwork-io
-   https://github.com/gruntwork-io/terraform-google-network
-   https://github.com/gruntwork-io/terraform-google-gke
+Heavily modified release by gruntwork-io
+  - https://github.com/gruntwork-io/terraform-google-network
+  - https://github.com/gruntwork-io/terraform-google-gke
 
 ## Requirements
 
@@ -12,12 +12,11 @@ Ensure the software listed in requirements are installed.
 
 ## Setup
 
-- execute '0-setup/init.sh' only once to setup google cloud and tfvars
-- execute '0-setup/run.sh' to apply terraform
+Execute terraform command in folder '0-setup/main'
 
 ## Deploy
 
-- execute '1-deploy/run.sh' to deploy the containers
+Execute terraform command in folder '0-deploy/main'
 
 ### Pending
 CONTAINER REGISTRY
