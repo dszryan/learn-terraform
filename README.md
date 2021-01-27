@@ -21,9 +21,6 @@ Execute terraform command in folder '0-deploy/main'
 HELM
 ### Pending
 
-  - STORAGE/BACKUP
-  - REMOTE STATE
-
 remote state not done
 
 helm not TF
@@ -42,3 +39,11 @@ http headers-> sso - claims
 gcr container the required container images (latest, v1, v2)
 
 desination rules and virtual services to be dynamically managed by devops ci/cd
+
+move back setup.sh
+
+private cluster
+
+with lose firewall rules - real life would be more finely tuned
+
+images dont actually appear

@@ -113,7 +113,7 @@ locals {
         service = 80
       }
       instances = {
-        intial = 2
+        initial = 2
         min = 1
         max = 5
       }
@@ -126,13 +126,13 @@ locals {
         service = 80
       }
       instances = {
-        intial = 2
+        initial = 2
         min = 1
         max = 5
       }
     }
   }
-} 
+}
 
 ## workaround
 resource "null_resource" "namespace-auto-inject-development" {
@@ -160,7 +160,7 @@ resource "kubernetes_deployment" "static-content" {
   }
 
   spec {
-    replicas = local.container.static.instances.intial
+    replicas = local.container.static.instances.initial
 
     selector {
       match_labels = {
@@ -176,16 +176,41 @@ resource "kubernetes_deployment" "static-content" {
       }
 
       spec {
+        volume {
+          name = "static-content-claim"
+          persistent_volume_claim {
+            claim_name = "static-content-claim-${var.environment}"
+          }
+        }
         container {
           image = local.container.static.image
           name  = local.container.static.name
-
+          
           port {
             container_port = local.container.static.port.container
+          }
+
+          volume_mount {
+            mount_path = "/usr/share/nginx/html"
+            name = "static-content-claim"
+            read_only = false
           }
         }
       }
     }
+  }
+}
+
+## not sure if there is a better way of doing this?
+resource "null_resource" "copy-data-xlsx" {
+  provisioner "local-exec" {
+    command = "kubectl cp ${path.module}/../artifact/data.xlsx ${var.environment}/$(kubectl get pod -l app=${local.container.static.name} -n ${var.environment} -o jsonpath='{.items[0].metadata.name}'):/usr/share/nginx/html/data.xlsx"
+  }
+}
+
+resource "null_resource" "copy-image-png" {
+  provisioner "local-exec" {
+    command = "kubectl cp ${path.module}/../artifact/image.png ${var.environment}/$(kubectl get pod -l app=${local.container.static.name} -n ${var.environment} -o jsonpath='{.items[0].metadata.name}'):/usr/share/nginx/html/image.png"
   }
 }
 
@@ -315,7 +340,7 @@ resource "kubernetes_deployment" "dynamic-content-v1" {
   }
 
   spec {
-    replicas = 2
+    replicas = local.container.dynamic.instances.initial
 
     selector {
       match_labels = {
@@ -359,7 +384,7 @@ resource "kubernetes_deployment" "dynamic-content-v2" {
   }
 
   spec {
-    replicas = 2
+    replicas = local.container.dynamic.instances.initial
 
     selector {
       match_labels = {
