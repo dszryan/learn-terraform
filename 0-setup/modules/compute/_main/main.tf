@@ -284,14 +284,14 @@ data "template_file" "cluster_ca_certificate" {
 
 ## namespaces
 
-resource "kubernetes_namespace" "development" {
+resource "kubernetes_namespace" "training" {
   provider = kubernetes
   lifecycle {
     ignore_changes = [ metadata ]
   }
 
   metadata {
-    name = "development"
+    name = "training"
   }
 }
 
@@ -323,8 +323,8 @@ resource "kubernetes_storage_class" "static-content" {
 
 resource "kubernetes_persistent_volume_claim" "static-content-claim-dev" {
   metadata {
-    name = "static-content-claim-development"
-    namespace = "development"
+    name = "static-content-claim-training"
+    namespace = "training"
   }
   spec {
     access_modes = ["ReadWriteOnce"]

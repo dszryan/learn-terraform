@@ -135,9 +135,9 @@ locals {
 }
 
 ## workaround
-resource "null_resource" "namespace-auto-inject-development" {
+resource "null_resource" "namespace-auto-inject-training" {
   provisioner "local-exec" {
-    command = "kubectl label namespace development istio-injection=enabled --overwrite"
+    command = "kubectl label namespace training istio-injection=enabled --overwrite"
   }
 }
 

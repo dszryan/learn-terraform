@@ -32,5 +32,5 @@ variable "cluster_name" {
 variable "environment" {
   description = "The deployment environment."
   type        = string
-  default     = "development"
+  default     = "training"
 }
