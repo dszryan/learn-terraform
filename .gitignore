@@ -1,5 +1,4 @@
 **/.terraform/*
-**/.istio/*
 submodule/*
 
 .terraform*
@@ -7,3 +6,4 @@ terraform.tfvars
 terraform.tfstate*
 *.json
 *.tfplan
+*.log

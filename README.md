@@ -18,23 +18,27 @@ Execute terraform command in folder '0-setup/main'
 
 Execute terraform command in folder '0-deploy/main'
 
-### Pending
-CONTAINER REGISTRY
-
-KUBECTL
-ISTIO
-VPN GATEWAY
-WAF
-SG/NACL
-ROUTE TABLES
-
-
-STORAGE/BACKUP
-VAULT
 HELM
-CONTAINERS
-NAMESPACES
-SCALING (AUTO)
-TAGGING
+### Pending
 
-REMOTE STATE
+  - STORAGE/BACKUP
+  - REMOTE STATE
+
+remote state not done
+
+helm not TF
+  version
+  rollback/forward
+  devops integration
+
+version 1/2 for dynamic content only
+
+static and dynamic same containers - but seperate routes
+
+https with cert manager termination at istioingress
+
+http headers-> sso - claims
+
+gcr container the required container images (latest, v1, v2)
+
+desination rules and virtual services to be dynamically managed by devops ci/cd

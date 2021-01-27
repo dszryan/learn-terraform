@@ -281,3 +281,21 @@ data "template_file" "access_token" {
 data "template_file" "cluster_ca_certificate" {
   template = module.gke_cluster.cluster_ca_certificate
 }
+
+## namespaces
+
+resource "kubernetes_namespace" "development" {
+  provider = kubernetes
+
+  metadata {
+    name = "development"
+  }
+}
+
+resource "kubernetes_namespace" "production" {
+  provider = kubernetes
+
+  metadata {
+    name = "production"
+  }
+}

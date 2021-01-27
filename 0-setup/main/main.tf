@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.13"
+}
+
 ##################################################################################
 # MODULES / RESOURCSE
 ##################################################################################
@@ -11,5 +15,5 @@ module "gke" {
 
 resource "google_container_registry" "registry" {
   project  = var.project
-  location = "ASIA"
+  # location = "ASIA"
 }
