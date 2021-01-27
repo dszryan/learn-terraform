@@ -286,6 +286,9 @@ data "template_file" "cluster_ca_certificate" {
 
 resource "kubernetes_namespace" "development" {
   provider = kubernetes
+  lifecycle {
+    ignore_changes = [ metadata ]
+  }
 
   metadata {
     name = "development"
@@ -294,8 +297,58 @@ resource "kubernetes_namespace" "development" {
 
 resource "kubernetes_namespace" "production" {
   provider = kubernetes
+  lifecycle {
+    ignore_changes = [ metadata ]
+  }
 
   metadata {
     name = "production"
+  }
+}
+
+# ## storage [should really be in a separate module - put here to save time]
+resource "kubernetes_storage_class" "static-content" {
+  metadata {
+    name = "static-content"
+  }
+  storage_provisioner = "pd.csi.storage.gke.io"
+  allow_volume_expansion = true
+  reclaim_policy      = "Retain"
+  parameters = {
+    type = "pd-standard"
+    replication-type = "regional-pd"
+  }
+}
+
+
+resource "kubernetes_persistent_volume_claim" "static-content-claim-dev" {
+  metadata {
+    name = "static-content-claim-development"
+    namespace = "development"
+  }
+  spec {
+    access_modes = ["ReadWriteOnce"]
+    storage_class_name = kubernetes_storage_class.static-content.metadata[0].name
+    resources {
+      requests = {
+        storage = "200Gi"
+      }
+    }
+  }
+}
+
+resource "kubernetes_persistent_volume_claim" "static-content-claim-prod" {
+  metadata {
+    name = "static-content-claim-production"
+    namespace = "production"
+  }
+  spec {
+    access_modes = ["ReadWriteOnce"]
+    storage_class_name = kubernetes_storage_class.static-content.metadata[0].name
+    resources {
+      requests = {
+        storage = "200Gi"
+      }
+    }
   }
 }
